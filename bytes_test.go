@@ -27,6 +27,15 @@ func TestBytes(t *testing.T) {
 					})
 				})
 			})
+			Convey("Given any Bytes", func() {
+				anyBytes := AnyBytes(length)
+				Convey("Given more Bytes", func() {
+					moreBytes := AnyBytes(length)
+					Convey("Then results should not resemble", func() {
+						So(anyBytes, ShouldNotResemble, moreBytes)
+					})
+				})
+			})
 			Convey("Given some Zero Bytes", func() {
 				zeroBytes := ZeroBytes(length)
 				Convey("Then each byte should equal zero", func() {

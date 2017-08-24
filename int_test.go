@@ -15,25 +15,16 @@ func TestInt(t *testing.T) {
 	// Only pass t into top-level Convey calls
 	Convey(fmt.Sprintf("Given the random seed %d", seed), t, func() {
 		rand.Seed(seed)
-		Convey("Given a length higher than 256 and lower than 1024", func() {
-			length := int(256 + rand.Int31()%(1024-256))
-
-			Convey("Given some Ints", func() {
-				someInts := Ints(length)
-				Convey("Given some more Ints", func() {
-					someMoreInts := Ints(length)
-					Convey("Then results should resemble", func() {
-						So(someInts, ShouldResemble, someMoreInts)
-					})
+		Convey("Given a random integer lower than 100 and another between 100 and 200", func() {
+			min := rand.Intn(100)
+			max := rand.Intn(100) + 100
+			Convey("When getting any integer between", func() {
+				result := AnyIntBetween(min, max)
+				Convey("Then result should be greater than or equal to minimum", func() {
+					So(result, ShouldBeGreaterThanOrEqualTo, min)
 				})
-			})
-			Convey("Given some random Ints", func() {
-				someRandomInts := RandomInts(length)
-				Convey("Given some more random Ints", func() {
-					someMoreRandomInts := RandomInts(length)
-					Convey("Then results should not resemble", func() {
-						So(someRandomInts, ShouldNotResemble, someMoreRandomInts)
-					})
+				Convey("Then result should be less than or equal to maximum", func() {
+					So(result, ShouldBeLessThanOrEqualTo, max)
 				})
 			})
 		})

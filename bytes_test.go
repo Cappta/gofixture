@@ -15,8 +15,8 @@ func TestBytes(t *testing.T) {
 	// Only pass t into top-level Convey calls
 	Convey(fmt.Sprintf("Given the random seed %d", seed), t, func() {
 		rand.Seed(seed)
-		Convey("Given a length higher than 256 and lower than 1024", func() {
-			length := int(256 + rand.Int31()%(1024-256))
+		Convey("Given a length between 256 and 1024", func() {
+			length := AnyIntBetween(256, 1024)
 
 			Convey("Given some Bytes", func() {
 				someBytes := Bytes(length)

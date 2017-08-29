@@ -1,7 +1,5 @@
 package gofixture
 
-import "math/rand"
-
 // Ints returns an int slice with the specified length
 func Ints(length int) (output []int) {
 	output = make([]int, length)
@@ -15,7 +13,7 @@ func Ints(length int) (output []int) {
 func AnyInts(length int) (output []int) {
 	output = make([]int, length)
 	for i := 0; i < length; i++ {
-		output[i] = int(rand.Uint64())
+		output[i] = AnyInt()
 	}
 	return
 }

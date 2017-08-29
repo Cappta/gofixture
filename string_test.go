@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math/rand"
 	"testing"
-	"time"
 
 	. "github.com/smartystreets/goconvey/convey"
 )
@@ -16,14 +15,26 @@ func TestString(t *testing.T) {
 	Convey(fmt.Sprintf("Given the random seed %d", seed), t, func() {
 		rand.Seed(seed)
 		Convey("Given a length higher than 256 and lower than 1024", func() {
-			length := int(256 + rand.Int31()%(1024-256))
+			length := AnyIntBetween(256, 1024)
 
 			Convey("Given a String", func() {
-				string := String(length)
+				value := String(length)
+				Convey("Then rune count should equal provided length", func() {
+					So(len([]rune(value)), ShouldEqual, length)
+				})
 				Convey("Given another String", func() {
-					anotherString := String(length)
+					anotherValue := String(length)
 					Convey("Then results should resemble", func() {
-						So(string, ShouldResemble, anotherString)
+						So(value, ShouldResemble, anotherValue)
+					})
+				})
+			})
+			Convey("Given any string", func() {
+				first := AnyString(length)
+				Convey("Given another string", func() {
+					second := AnyString(length)
+					Convey("Then first string should not resemble second", func() {
+						So(first, ShouldNotResemble, second)
 					})
 				})
 			})

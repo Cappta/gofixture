@@ -28,5 +28,14 @@ func TestInt(t *testing.T) {
 				})
 			})
 		})
+		Convey("Given a random integer", func() {
+			first := AnyInt()
+			Convey("Given another random integer", func() {
+				second := AnyInt()
+				Convey("Then first integer should not equal second", func() {
+					So(first, ShouldNotEqual, second)
+				})
+			})
+		})
 	})
 }

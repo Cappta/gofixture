@@ -1,20 +1,15 @@
 package gofixture
 
 import (
-	"fmt"
-	"math/rand"
 	"testing"
 	"time"
 
+	. "github.com/Cappta/gohelpconvey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestByte(t *testing.T) {
-	seed := time.Now().UTC().UnixNano()
-
-	// Only pass t into top-level Convey calls
-	Convey(fmt.Sprintf("Given the random seed %d", seed), t, func() {
-		rand.Seed(seed)
+	ConveyWithSeed(time.Now().UTC().UnixNano(), t, func() {
 		Convey("Given a zero byte", func() {
 			zeroByte := byte(0)
 			Convey("Then should panic when getting Any Byte Less Than", func() {

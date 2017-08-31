@@ -1,19 +1,15 @@
 package gofixture
 
 import (
-	"fmt"
-	"math/rand"
 	"testing"
+	"time"
 
+	. "github.com/Cappta/gohelpconvey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestString(t *testing.T) {
-	seed := time.Now().UTC().UnixNano()
-
-	// Only pass t into top-level Convey calls
-	Convey(fmt.Sprintf("Given the random seed %d", seed), t, func() {
-		rand.Seed(seed)
+	ConveyWithSeed(time.Now().UTC().UnixNano(), t, func() {
 		Convey("Given a length higher than 256 and lower than 1024", func() {
 			length := AnyIntBetween(256, 1024)
 
